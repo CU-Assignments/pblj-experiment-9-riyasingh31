@@ -1,0 +1,26 @@
+package com.example.hibernate;
+
+public class Main {
+    public static void main(String[] args) {
+        StudentDAO dao = new StudentDAO();
+
+        // Create
+        Student s1 = new Student("Alice", 21);
+        dao.createStudent(s1);
+
+        // Read
+        Student fetched = dao.readStudent(s1.getId());
+        System.out.println("Read: " + fetched);
+
+        // Update
+        fetched.setName("Alice Updated");
+        dao.updateStudent(fetched);
+        System.out.println("Updated: " + dao.readStudent(fetched.getId()));
+
+        // Delete
+        dao.deleteStudent(fetched.getId());
+        System.out.println("Deleted. Now fetch returns: " + dao.readStudent(fetched.getId()));
+
+        HibernateUtil.shutdown();
+    }
+}
